@@ -3,6 +3,6 @@
 Static GitHub Pages site for the Dispatch Ledger Android APK.
 
 - Latest APK: `dispatch-ledger-latest.apk`
-- Versioned APK: `dispatch-ledger-v08.apk`
-- Version: `v08 / 1.0.7`
-- SHA256: `168755C60F4B5A6D1D327C83C73EC492D3B60646B3198427AABCBA9BDBF95687`
+- Versioned APK: `dispatch-ledger-v09.apk`
+- Version: `v09 / 1.0.8`
+- SHA256: `17514E1B6EEA02D0C16DA41D871FE0901DF5F5DFDBCAECDE06B802544FDE53A4`
