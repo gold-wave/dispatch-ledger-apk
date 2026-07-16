@@ -1,93 +1,407 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dispatch Ledger APK Download</title>
+  <title>Phone Dispatch App - APK Download</title>
   <style>
     :root {
       color-scheme: light;
-      font-family: Arial, "Noto Sans", sans-serif;
-      background: #f3f6f7;
-      color: #162229;
+      font-family: Arial, "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: #f4f7f8;
+      color: #13242c;
+      --ink: #13242c;
+      --muted: #5c6f78;
+      --line: #dbe5e8;
+      --panel: #ffffff;
+      --brand: #155e70;
+      --brand-dark: #0d4655;
+      --ok: #187a5b;
+      --soft: #eaf3f5;
+    }
+    * {
+      box-sizing: border-box;
     }
     body {
       margin: 0;
-      padding: 24px;
+      background: var(--soft);
     }
     main {
-      max-width: 720px;
+      max-width: 1120px;
       margin: 0 auto;
+      padding: 22px;
     }
     header {
-      padding: 28px 0 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 22px;
+      align-items: center;
+      min-height: 86vh;
+      padding: 18px 0 28px;
+    }
+    h1, h2, h3, p {
+      margin-top: 0;
     }
     h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      line-height: 1.2;
+      margin-bottom: 14px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: 0;
+      color: var(--ink);
     }
-    p {
-      line-height: 1.55;
-      color: #53656e;
+    h2 {
+      margin-bottom: 14px;
+      font-size: 24px;
+      line-height: 1.25;
     }
-    .panel {
-      background: #fff;
-      border: 1px solid #dae2e5;
-      border-radius: 8px;
-      padding: 18px;
-      margin: 16px 0;
+    h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
     }
-    .download {
-      display: inline-block;
-      background: #155e70;
-      color: #fff;
+    p, li {
+      line-height: 1.65;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    a {
+      color: var(--brand);
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .lead {
+      max-width: 680px;
+      font-size: 18px;
+      color: #40545e;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 22px 0 16px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      border-radius: 7px;
+      padding: 13px 18px;
       text-decoration: none;
       font-weight: 700;
-      padding: 14px 18px;
-      border-radius: 6px;
-      margin: 8px 0 12px;
+      border: 1px solid transparent;
+    }
+    .button.primary {
+      background: var(--brand);
+      color: #fff;
+    }
+    .button.primary:hover {
+      background: var(--brand-dark);
+    }
+    .button.secondary {
+      background: #fff;
+      color: var(--brand);
+      border-color: var(--line);
     }
     .meta {
-      font-size: 13px;
+      font-size: 12px;
       word-break: break-all;
-    }
-    ol {
-      padding-left: 22px;
-      line-height: 1.65;
+      color: #657982;
     }
     code {
       background: #edf3f5;
       padding: 2px 5px;
       border-radius: 4px;
     }
+    section {
+      margin: 22px 0;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+    }
+    .hero-shot {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 20px 42px rgba(20, 48, 60, 0.13);
+    }
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .quick-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .quick-item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .steps {
+      counter-reset: steps;
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+    }
+    .steps li {
+      counter-increment: steps;
+      position: relative;
+      padding: 13px 14px 13px 52px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .steps li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    figure {
+      margin: 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      object-position: top center;
+      background: #f8fbfc;
+    }
+    figcaption {
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      border-top: 1px solid var(--line);
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+    .feature-list li {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .download-panel {
+      border-left: 5px solid var(--ok);
+    }
+    .footer {
+      padding: 22px 0 10px;
+      color: #6a7d86;
+      font-size: 13px;
+    }
+    @media (max-width: 860px) {
+      main {
+        padding: 16px;
+      }
+      header,
+      .split {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .quick-grid,
+      .feature-list,
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+      figure img {
+        height: auto;
+      }
+      .actions {
+        display: grid;
+      }
+      .button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <h1>Dispatch Ledger / 寄送台账</h1>
-      <p>Official APK download page for store staff. 门店员工安卓安装包下载页。</p>
+      <div>
+        <p class="eyebrow">Phone Dispatch / 寄送台账</p>
+        <h1>门店手机端旧机寄送台账工具</h1>
+        <p class="lead">
+          面向以旧换新门店使用。门店即使没有电脑，也可以直接在手机上完成设备录入、IMEI 扫码或拍照识别、寄送批次整理、标准 Excel 导出，并通过 WhatsApp、飞书等渠道分享给后台人员统一收集。
+        </p>
+        <div class="actions">
+          <a class="button primary" href="dispatch-ledger-latest.apk" download>Download Latest APK</a>
+          <a class="button secondary" href="#how-to-use">View Usage Guide</a>
+        </div>
+        <p class="meta">
+          Latest version: <strong>v16 / 1.0.15</strong><br>
+          SHA256: <code>3C36138A11E297CD8E3F5E729640CEB7E70E1AFBA03EC771C264B7CDF999A319</code>
+        </p>
+      </div>
+      <div class="hero-shot">
+        <img src="images/mobile-filled.png" alt="Phone Dispatch mobile screen with device entry and export functions">
+      </div>
     </header>
 
-    <section class="panel">
-      <h2>Latest Version</h2>
-      <p>Version: <strong>v16 / 1.0.15</strong></p>
-      <a class="download" href="dispatch-ledger-latest.apk" download>Download APK</a>
-      <p class="meta">SHA256: <code>3C36138A11E297CD8E3F5E729640CEB7E70E1AFBA03EC771C264B7CDF999A319</code></p>
+    <section class="quick-grid" aria-label="Key benefits">
+      <div class="quick-item">
+        <strong>手机录入</strong>
+        <span>门店不用电脑也能填写寄送台账。</span>
+      </div>
+      <div class="quick-item">
+        <strong>IMEI 识别</strong>
+        <span>支持相机识别和相册图片识别 IMEI1。</span>
+      </div>
+      <div class="quick-item">
+        <strong>Excel 导出</strong>
+        <span>自动生成统一格式的寄送 Excel。</span>
+      </div>
+      <div class="quick-item">
+        <strong>直接分享</strong>
+        <span>可分享到 WhatsApp、飞书、邮箱等应用。</span>
+      </div>
     </section>
 
     <section class="panel">
-      <h2>Install Notes / 安装说明</h2>
-      <ol>
-        <li>Open this page on the Android phone. 在安卓手机上打开本页面。</li>
-        <li>Tap <strong>Download APK</strong>. 点击下载安装包。</li>
-        <li>If prompted, allow installing unknown apps for the browser or WhatsApp. 如提示，请允许浏览器或 WhatsApp 安装未知应用。</li>
-        <li>Install or update the app. 安装或覆盖更新应用。</li>
-      </ol>
-      <p>Updating from this long-term APK line keeps the local SQLite data. Uninstalling the app or clearing app data will remove local data.</p>
-      <p>从长期版 APK 覆盖更新会保留本机 SQLite 数据；卸载应用或清除应用数据会删除本机数据。</p>
+      <h2>为什么要做这个 App</h2>
+      <p>
+        以旧换新业务里，门店经常需要把多台旧机整理成一个寄送批次，并记录 IMEI、机型、价格、门店、发件人、运单号等信息。很多门店没有电脑，手动维护 Excel 不方便，也容易出现漏填、错填、格式不统一的问题。
+      </p>
+      <p>
+        Phone Dispatch App 把这套流程放到安卓手机上：前端门店按固定表单录入，App 自动做基础校验并导出标准 Excel；后台收到各门店文件后，可以继续合并、查重、核价和归档。
+      </p>
+      <img src="images/workflow-shift.png" alt="Workflow shift from manual Excel to mobile app and warehouse merge" style="width:100%;height:auto;border:1px solid var(--line);border-radius:8px;">
     </section>
+
+    <section id="how-to-use" class="split">
+      <div class="panel">
+        <h2>门店使用流程</h2>
+        <ol class="steps">
+          <li><strong>填写店铺信息：</strong>录入 Shop ID 和 Store Name，保存后下次自动带出。</li>
+          <li><strong>填写发件人信息：</strong>录入发件人姓名和联系电话，方便后台或母仓联系门店。</li>
+          <li><strong>录入库存手机：</strong>填写机型、内存、回收价、检测状态、备注和完整 15 位 IMEI。</li>
+          <li><strong>识别 IMEI：</strong>通过相机或相册识别 IMEI1，识别后人工核对后 5 位。</li>
+          <li><strong>创建寄送运单：</strong>选择寄送日期和寄送方式；快递寄送必须填写 Waybill。</li>
+          <li><strong>加入当前运单：</strong>把本次要寄出的设备加入当前寄送批次。</li>
+          <li><strong>导出并分享：</strong>生成标准 Excel，并通过 WhatsApp、飞书等应用直接发送。</li>
+        </ol>
+      </div>
+      <div class="panel download-panel">
+        <h2>安装说明</h2>
+        <ol>
+          <li>用安卓手机打开本页面。</li>
+          <li>点击 <strong>Download Latest APK</strong> 下载。</li>
+          <li>如系统提示，请允许浏览器、WhatsApp 或文件管理器安装未知来源应用。</li>
+          <li>安装或覆盖更新 App。</li>
+        </ol>
+        <p>
+          覆盖安装同一长期版本线通常会保留本机数据；卸载 App 或清除 App 数据会删除本机数据。每次寄送完成后，建议及时导出 Excel 并分享到指定群组。
+        </p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>关键界面</h2>
+      <div class="image-grid">
+        <figure>
+          <img src="images/mobile-empty.png" alt="Empty dispatch ledger screen">
+          <figcaption>新建批次前，先填写店铺、发件人和寄送信息。</figcaption>
+        </figure>
+        <figure>
+          <img src="images/mobile-filled.png" alt="Device entry screen">
+          <figcaption>录入设备信息，支持完整 IMEI、价格、检测状态和备注。</figcaption>
+        </figure>
+        <figure>
+          <img src="images/mobile-flow-check.png" alt="Dispatch readiness screen">
+          <figcaption>加入当前运单后，App 会展示数量、金额和导出状态。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2>导出的 Excel 用来做什么</h2>
+        <p>
+          App 导出的 Excel 会按统一字段整理门店、发件人、寄送日期、运单号、设备 IMEI、机型、内存、价格和检测备注。后台人员收到后，可以统一保存、合并、查重、核价和核收。
+        </p>
+        <ul class="feature-list">
+          <li><strong>格式统一：</strong>减少后台二次整理。</li>
+          <li><strong>字段完整：</strong>方便追踪每一台设备。</li>
+          <li><strong>便于查重：</strong>IMEI 是后续核查核心字段。</li>
+          <li><strong>方便流转：</strong>手机直接分享到 WhatsApp / 飞书。</li>
+        </ul>
+      </div>
+      <figure>
+        <img src="images/excel-dispatch-example.png" alt="Exported Excel example">
+        <figcaption>标准 Excel 示例：便于后台统一收集和核查。</figcaption>
+      </figure>
+    </section>
+
+    <section class="panel">
+      <h2>门店操作注意事项</h2>
+      <ul>
+        <li>每个门店固定使用自己的 Shop ID 和 Store Name。</li>
+        <li>快递寄送必须填写 Waybill；自送交接可以不填，但建议在群消息里说明。</li>
+        <li>IMEI 建议扫码或拍照识别，保存前人工核对完整 15 位，尤其后 5 位。</li>
+        <li>录错设备可以作废，作废设备不会进入导出的 Excel。</li>
+        <li>导出后请及时分享到指定 WhatsApp、飞书或邮箱，方便后台收集。</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>AI 实践价值</h2>
+      <p>
+        这个项目不是单纯做一个 App，而是把门店分散录入、Excel 格式不统一、IMEI 容易错、后台核查成本高这些真实业务问题，整理成一个可落地的手机端流程。AI 辅助完成了需求梳理、原型迭代、应用开发、文档整理和流程标准化，让门店操作更轻、后台收集更规整、后续核查更高效。
+      </p>
+    </section>
+
+    <p class="footer">
+      Phone Dispatch / Dispatch Ledger APK page. Latest APK: dispatch-ledger-latest.apk
+    </p>
   </main>
 </body>
 </html>
